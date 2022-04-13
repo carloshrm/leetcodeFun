@@ -7,24 +7,65 @@ using System.Threading.Tasks;
 namespace leetcode
 {
     partial class Solution
-    {        
-        public IList<IList<int>> ShiftGrid(int[][] grid, int k)
+    {
+        public void GameOfLife(int[][] board)
         {
-            int x = grid.Length;
-            int y = grid[0].Length;
+            int row = board.Length;
+            int col = board[0].Length;
 
-            var shifted = new List<IList<int>>(Enumerable.Range(0, x).Select(x => new List<int>(Enumerable.Range(0,y).Select(x => 0))));
-            for (int i = 0; i < x; i++)
+            Array.Copy(runCycle(), board, row);
+
+            int[][] runCycle()
             {
-                for (int j = 0; j < y; j++)
+                var cycle = new int[row][].Select(x => new int[col].ToArray()).ToArray();
+                for (int i = 0; i < row; i++)
                 {
-                    int shiftI = ((i * y) + j + k) % (x * y);
-                    int postI = shiftI / y;
-                    int postJ = shiftI % y;
-                    shifted[postI][postJ] = grid[i][j];
+                    for (int j = 0; j < col; j++)
+                    {
+                        int neighbors = countNeighbors(i, j);
+                        cycle[i][j] = board[i][j];
+                            
+                        if (board[i][j] == 1 && (neighbors > 3 || neighbors < 2))
+                        {
+                            cycle[i][j] = 0;
+                        }
+                        else if (board[i][j] == 0 && neighbors == 3)
+                        {
+                            cycle[i][j] = 1;
+                        }
+                    }
                 }
+                return cycle;
             }
-            return shifted;
+
+            int countNeighbors(int x, int y)
+            {
+                int count = 0;
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        int shiftX = i + x;
+                        int shiftY = j + y;
+                        if (shiftX < 0 || shiftX >= row || shiftY < 0 || shiftY >= col)
+                        {
+                            continue;
+                        }
+                        if (i == 0 && j == 0)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (board[shiftX][shiftY] == 1)
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                }
+                return count;
+            }
         }
     }
 }
