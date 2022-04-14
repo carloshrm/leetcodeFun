@@ -8,7 +8,7 @@ namespace leetcode
         {
             var sln = new Solution();
 
-            var test = sln.GenerateMatrix(3);
+            var test = sln.SearchBST(tree, 2);
             //Console.WriteLine(result);
         }
     }
