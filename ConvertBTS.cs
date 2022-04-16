@@ -3,14 +3,14 @@
     partial class Solution
     {
         public int treeSum = 0;
-        public TreeNode ConvertBTS(TreeNode root)
+        public TreeNode ConvertBST(TreeNode root)
         {
             if (root != null)
             {
-                ConvertBTS(root.right);
+                ConvertBST(root.right);
                 treeSum += root.val;
                 root.val = treeSum;
-                ConvertBTS(root.left);
+                ConvertBST(root.left);
             }
             return root;
         }
