@@ -8,11 +8,10 @@ namespace leetcode
         {
             var sln = new Solution();
 
-            var tree = new TreeNode(4);
-            tree.right= new TreeNode(6, new TreeNode(5), new TreeNode(7, null, new TreeNode(8)));
-            tree.left = new TreeNode(1, new TreeNode(0), new TreeNode(2, null, new TreeNode(3)));
-            var test = sln.ConvertBST(tree);
-            //Console.WriteLine(result);
+            var tree = new TreeNode(5);
+            tree.right = new TreeNode(6, null, new TreeNode(8, new TreeNode(7), new TreeNode(9)));
+            tree.left = new TreeNode(3, new TreeNode(2, new TreeNode(1)), new TreeNode(4));
+            var test = sln.IncreasingBST(tree);
         }
     }
 }
