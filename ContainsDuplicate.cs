@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace leetcode
+namespace leetcode;
+
+partial class Solution
 {
-    partial class Solution
+    public bool ContainsDuplicate(int[] nums)
     {
-        public bool ContainsDuplicate(int[] nums)
+        Dictionary<int, int> result = new Dictionary<int, int>();
+        foreach (var n in nums)
         {
-            Dictionary<int, int> result = new Dictionary<int, int>();
-            foreach (var n in nums)
+            if (result.ContainsKey(n))
             {
-                if (result.ContainsKey(n))
-                {
-                    return true;
-                }
-                else
-                {
-                    result.Add(n, n);
-                }
+                return true;
             }
-            return false;
+            else
+            {
+                result.Add(n, n);
+            }
         }
+        return false;
     }
 }
